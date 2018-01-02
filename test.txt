@@ -1,3 +1,4 @@
 add test txt
 do something test
 pull request test
+command pull request test
