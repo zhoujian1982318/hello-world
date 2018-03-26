@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<context:property-placeholder/>
+	 <!-- provider's application name, used for tracing dependency relationship -->
+    <dubbo:application  name="hello-dubbo-provider" owner="jason"  organization="relay2" version="1.0" />
+	
+	<dubbo:registry address="zookeeper://10.22.0.81:2181" file="${user.home}/output/dubbo.cache" />
+	
+	<dubbo:protocol name="dubbo" port="20880" ></dubbo:protocol>
+	
+	<bean id="apService" class="com.example.dubbo.provider.ApServiceImpl"/>
+	
+	<!-- declare the service interface to be exported -->
+	<dubbo:service interface="com.examples.service.ApService" ref="apService" timeout="300" loadbalance="roundrobin" retries="2" owner="jason" version="1.0"></dubbo:service>
+	
+</beans>

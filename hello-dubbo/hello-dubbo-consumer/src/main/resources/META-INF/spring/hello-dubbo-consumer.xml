@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<context:property-placeholder/>
+	<dubbo:application name="hello-dubbo-consumer" owner="jason" version="1.0"></dubbo:application>
+	
+	<dubbo:registry address="zookeeper://10.22.0.81:2181" file="${user.home}/output/dubbo.cache" />
+	
+	<dubbo:reference id="apService" check="false" interface="com.examples.service.ApService" 
+			stub="com.example.dubbo.consumer.ApServiceStub"  mock="com.example.dubbo.consumer.ApServiceMock"  version="1.1"/>
+	
+</beans>
