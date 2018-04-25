@@ -1,0 +1,14 @@
+DeviceAggr{deviceId=1, appId=102, upBytes=911, downBytes=821, aggTs=1523934000000, aggTime=2018-04-17 11:00:00}
+DeviceAggr{deviceId=1, appId=101, upBytes=963, downBytes=946, aggTs=1523934000000, aggTime=2018-04-17 11:00:00}
+DeviceAggr{deviceId=1, appId=101, upBytes=2555, downBytes=2292, aggTs=1523937600000, aggTime=2018-04-17 12:00:00}
+DeviceAggr{deviceId=1, appId=102, upBytes=1664, downBytes=1744, aggTs=1523937600000, aggTime=2018-04-17 12:00:00}
+DeviceAggr{deviceId=1, appId=102, upBytes=1514, downBytes=1684, aggTs=1523941200000, aggTime=2018-04-17 13:00:00}
+DeviceAggr{deviceId=1, appId=101, upBytes=1972, downBytes=1647, aggTs=1523941200000, aggTime=2018-04-17 13:00:00}
+DeviceAggr{deviceId=1, appId=102, upBytes=1860, downBytes=1553, aggTs=1523944800000, aggTime=2018-04-17 14:00:00}
+DeviceAggr{deviceId=1, appId=101, upBytes=834, downBytes=691, aggTs=1523944800000, aggTime=2018-04-17 14:00:00}
+DeviceAggr{deviceId=1, appId=102, upBytes=1849, downBytes=1475, aggTs=1523948400000, aggTime=2018-04-17 15:00:00}
+DeviceAggr{deviceId=1, appId=101, upBytes=1594, downBytes=1523, aggTs=1523948400000, aggTime=2018-04-17 15:00:00}
+DeviceAggr{deviceId=1, appId=101, upBytes=1786, downBytes=1768, aggTs=1523952000000, aggTime=2018-04-17 16:00:00}
+DeviceAggr{deviceId=1, appId=102, upBytes=1895, downBytes=1644, aggTs=1523952000000, aggTime=2018-04-17 16:00:00}
+DeviceAggr{deviceId=1, appId=102, upBytes=1145, downBytes=961, aggTs=1523955600000, aggTime=2018-04-17 17:00:00}
+DeviceAggr{deviceId=1, appId=101, upBytes=646, downBytes=635, aggTs=1523955600000, aggTime=2018-04-17 17:00:00}

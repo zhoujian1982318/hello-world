@@ -1,0 +1,16 @@
+he static variable in CollectSink is used here because Flink serializes all operators before distributing them across a cluster. Communicating with operators instantiated by a local Flink mini cluster via static variables is one way around this issue. Alternatively, you could for example write the data to files in a temporary directory with your test sink. You can also implement your own custom sources for emitting watermarks.
+Testing checkpointing and state handling
+One way to test state handling is to enable checkpointing in integration tests.
+You can do that by configuring your StreamExecutionEnvironment in the test:
+Java
+Scala
+env.enableCheckpointing(500);
+env.setRestartStrategy(RestartStrategies.fixedDelayRestart(3, 100));
+
+And for example adding to your Flink application an identity mapper operator that will throw an exception once every 1000ms. However writing such test could be tricky because of time dependencies between the actions.
+
+Another approach is to write a unit test using the Flink internal testing utility AbstractStreamOperatorTestHarness from the flink-streaming-java module.
+
+For an example of how to do that please have a look at the org.apache.flink.streaming.runtime.operators.windowing.WindowOperatorTest also in the flink-streaming-java module.
+
+Be aware that AbstractStreamOperatorTestHarness is currently not a part of public API and can be subject to change

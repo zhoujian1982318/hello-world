@@ -1,0 +1,2 @@
+DeviceAggr{deviceId=1, appId=101, upBytes=61, downBytes=124, aggTs=null, aggTime=null}
+DeviceAggr{deviceId=1, appId=101, upBytes=108, downBytes=174, aggTs=null, aggTime=null}

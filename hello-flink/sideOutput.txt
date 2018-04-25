@@ -1,0 +1,2 @@
+DeviceDetail{deviceId=1, appId=101, upBytes=61, downBytes=83, eventTime=2018-04-17 08:00:00}
+DeviceDetail{deviceId=1, appId=101, upBytes=24, downBytes=38, eventTime=2018-04-17 08:30:00}
