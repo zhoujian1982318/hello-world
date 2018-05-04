@@ -1,0 +1,53 @@
+{
+	"version": 1,
+	"partitions": [
+		{
+			"topic": "sport-photo",
+			"partition": 2,
+			"replicas": [
+				1,
+				4
+			]
+		},
+		{
+			"topic": "sport-photo",
+			"partition": 1,
+			"replicas": [
+				0,
+				1
+			]
+		},
+		{
+			"topic": "sport-photo",
+			"partition": 0,
+			"replicas": [
+				4,
+				0
+			]
+		},
+		{
+			"topic": "sport",
+			"partition": 2,
+			"replicas": [
+				4,
+				0
+			]
+		},
+		{
+			"topic": "sport",
+			"partition": 0,
+			"replicas": [
+				0,
+				1
+			]
+		},
+		{
+			"topic": "sport",
+			"partition": 1,
+			"replicas": [
+				1,
+				4
+			]
+		}
+	]
+}

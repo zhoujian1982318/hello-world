@@ -11,6 +11,7 @@ import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.timestamps.BoundedOutOfOrdernessTimestampExtractor;
+import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows;
 import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer010;
 import org.apache.flink.util.Collector;
@@ -31,7 +32,7 @@ public class LatenessSampleJob {
 		
 		final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 		// env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
-		env.setStreamTimeCharacteristic(TimeCharacteristic.IngestionTime);
+		env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
 
 		Properties properties = new Properties();
 		properties.setProperty("bootstrap.servers", "10.22.0.81:9092");
@@ -39,7 +40,7 @@ public class LatenessSampleJob {
 		//properties.setProperty("zookeeper.connect", "localhost:2181");
 		properties.setProperty("group.id", "test");
 		DataStream<String> latenessDs = env
-					.addSource(new FlinkKafkaConsumer010<>("device-data", new SimpleStringSchema(), properties));
+					.addSource(new FlinkKafkaConsumer010<>("device-data", new SimpleStringSchema(), properties)).setParallelism(3);
 
 
         //env.setStreamTimeCharacteristic(TimeCharacteristic.IngestionTime);
@@ -51,7 +52,7 @@ public class LatenessSampleJob {
         DataStream<DeviceDetail> detailDs = latenessDs.flatMap((String value, Collector<DeviceDetail> out)-> {
         	DeviceDetail  device = mapper.readValue(value, DeviceDetail.class);
         	out.collect(device);
-        });
+        }).setParallelism(3);
         
        
         AggregateFunction<DeviceDetail, DeviceAggr, DeviceAggr> aggreFun = new AggregateFunction<DeviceDetail, DeviceAggr, DeviceAggr>() {
@@ -96,19 +97,18 @@ public class LatenessSampleJob {
      	
      	DataStream<DeviceAggr> aggrDs = detailDs
 				//.assignTimestampsAndWatermarks(new LatenessTimeStamp(Time.minutes(2)))
-//				.assignTimestampsAndWatermarks(new DeviceTimeStamp())
-//				.name("water-device")
+				.assignTimestampsAndWatermarks(new DeviceTimeStamp())
+				.name("water-device")
 				.keyBy("deviceId", "appId")
 				//.window(TumblingEventTimeWindows.of(Time.hours(6)))，自定义窗口的开始时间和结束时间。 
-				//要不让系统会根据element event time算出 开始时间和结束时间 TimeWindow.getWindowStartWithOffset(timestamp, offset, size);
-//				.window(new CustomerTumblingEventTimeWindows(Time.hours(6).toMilliseconds(), 0L))
+//				要不让系统会根据element event time算出 开始时间和结束时间 TimeWindow.getWindowStartWithOffset(timestamp, offset, size);
+				.window(new CustomerTumblingEventTimeWindows(Time.hours(6).toMilliseconds(), 0L))
 				////如果是 IngestionTime。即使没有 element 发送上来的  如果过来当前时间， 也会触发，  Trigger#onEventTime(long, Window, TriggerContext)} 
-				.timeWindow(Time.hours(1))
+//				.timeWindow(Time.hours(1))
 				//allowedLateness 不需要与 BoundedOutOfOrdernessTimestampExtractor 结合， 只是时间跟 event time 有关，跟elements到达的时间没有关系
 				//这个allowedLateness 与 event time 相关，
 				.allowedLateness(Time.hours(12))
-				
-				.aggregate(aggreFun).name("device-aggreate-stream");
+				.aggregate(aggreFun).name("device-aggreate-stream").setParallelism(3);
      	
        aggrDs.writeAsText("deviceOnputLateness.txt",WriteMode.OVERWRITE).name("fileSink").setParallelism(1);
        //aggrDs.print().name("console-sink");
