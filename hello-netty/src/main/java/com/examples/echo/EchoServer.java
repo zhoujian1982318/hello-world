@@ -41,7 +41,7 @@ public class EchoServer {
 					ChannelPipeline pipeline = ch.pipeline();
 					pipeline.addLast(new LoggingHandler(LogLevel.INFO));
 					pipeline.addLast(new EchoServerHandler());
-//					pipeline.addLast(longTaskExe, new LongTaskHandler());
+					pipeline.addLast(longTaskExe, new LongTaskHandler());
 //					pipeline.addLast(longTskGroup, new LongTaskHandler());
 //					pipeline.addLast(longTskGroup, new LongTask2Handler());
 					pipeline.addLast(new ScheduleTaskHandler());

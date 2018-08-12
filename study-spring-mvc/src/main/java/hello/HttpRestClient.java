@@ -54,7 +54,7 @@ public class HttpRestClient {
     }
 
     /**
-     * ��ʼ��HTTP Client
+     * ?????HTTP Client
      */
     private void init() {
         try {
@@ -119,10 +119,10 @@ public class HttpRestClient {
     }
     
     /**
-     * ��ȡ authCode���㷨
+     * ??? authCode????
      * 
-     * @param msgString �������
-     * @param authKey �ͻ���Authentication Key
+     * @param msgString ???????
+     * @param authKey ?????Authentication Key
      * 
      * @return
     */
