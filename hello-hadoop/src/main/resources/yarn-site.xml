@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- Site specific YARN configuration properties -->
+
+    <property>
+        <name>yarn.nodemanager.aux-services</name>
+        <value>mapreduce_shuffle</value>
+    </property>
+    <property>
+        <name>yarn.web-proxy.address</name>
+        <value>wentong-01.eng.hz.relay2.cn:8100</value>
+    </property>
+    <property>
+        <name>yarn.resourcemanager.hostname</name>
+        <value>wentong-01.eng.hz.relay2.cn</value>
+    </property>
+    <property>
+        <name>yarn.log-aggregation-enable</name>
+        <value>true</value>
+    </property>
+
+</configuration>
