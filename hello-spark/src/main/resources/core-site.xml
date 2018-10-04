@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+    <!--
     <property>
         <name>fs.default.name</name>
         <value>hdfs://wentong-01.eng.hz.relay2.cn:9000</value>
     </property>
+    -->
 </configuration>
