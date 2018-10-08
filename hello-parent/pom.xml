@@ -16,6 +16,9 @@
         <module>../hello-lucene</module>
         <module>../hello-netty</module>
         <module>../hello-spring-boot</module>
+        <module>../hello-hadoop</module>
+        <module>../hello-httpclient</module>
+        <module>../hello-elasticsearch</module>
         <module>../study-spring-mvc</module>
     </modules>
 
