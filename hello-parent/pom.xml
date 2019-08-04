@@ -20,6 +20,7 @@
         <module>../hello-httpclient</module>
         <module>../hello-elasticsearch</module>
         <module>../study-spring-mvc</module>
+        <module>../hello-spring-mvc-xml</module>
     </modules>
 
 
